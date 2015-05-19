@@ -5,15 +5,20 @@
 ## the makeCacheMatrix function will generate a matrix object and then cache the inverser
 ## the cacheSolve function will return the inverse of the cached matrix returned by makeCacheMatrix
 ## 
-## need to add comments
+## Comments for the functions are embedded in the function itself
+
 makeCacheMatrix <- function(x = matrix()) {
 i <- NULL
+# set the matrix
     set <- function(y) {
       x <<- y
       i <<- NULL
     }
+	# get the matrix
     get <- function() x
+	#set the inverse of the matrix
     setinv <- function(solve) i <<- solve
+	# get the inverse of the matrix
     getinv <- function() i
     list(set = set, get = get, setinv = setinv, getinv = getinv)
 }
@@ -24,12 +29,15 @@ i <- NULL
 cacheSolve <- function(z, ...) {
         ## This will return a matrix that is the inverse of 'z'
 		i<- z$getinv()
+		# check to see if the inverse matrix has been determined 
     if(!is.null(i)) {
       message("obtaining data")
       return(i)
     }
+	# calculate the inverse
     data <- z$get()
     i<- solve(data, ...)
+	# set the value of the inverse 
     z$setinv(i)
     i
 }
